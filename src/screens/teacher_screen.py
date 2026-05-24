@@ -44,6 +44,8 @@ def teacher_screen_login():
     st.header('Login using password',text_alignment='center')
     st.space
     st.space
+
+    
     teacher_username=st.text_input("Username",placeholder="Enter your username")
     teacher_pass=st.text_input("Password",placeholder="Enter your password",type='password')
     st.divider()
