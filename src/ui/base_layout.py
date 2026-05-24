@@ -17,12 +17,12 @@ def style_background_home():
                 ,unsafe_allow_html=True)
     
 
-    def style_background_dashboard():
+def style_background_dashboard():
 
         st.markdown("""
             <style>
                     .stApp{
-                            background:#5865F2 !important;
+                            background:#E0E3FF !important;
                         }
                     
             </style>
