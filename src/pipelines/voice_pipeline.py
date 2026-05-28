@@ -20,7 +20,7 @@ def get_voice_embedding(audio_bytes):
         st.error('Voice recognition error')
         return None
     
-def identity_speaker(new_embedding,candidates_dict,threshold=0.7):
+def identify_speaker(new_embedding,candidates_dict,threshold=0.7):
     if new_embedding is None or not candidates_dict:
         return None,0.0
     
@@ -48,13 +48,13 @@ def process_bulk_audio(audio_bytes,candidates_dict,threshold=0.7):
         identified_results={}
 
         for start,end in segments:
-            if(end,start)<sr*0.5:
+            if(end-start)<sr*0.5:
                 continue
             segment_audio=audio[start:end]
             wav=preprocess_wav(segment_audio)   
             embedding=encoder.embed_utterance(wav)
 
-            sid,score=identity_speaker(embedding,candidates_dict,threshold)
+            sid,score=identify_speaker(embedding,candidates_dict,threshold)
             if sid:
                 if sid not in identified_results or score>identified_results[sid]:
                     identified_results[sid]=score
