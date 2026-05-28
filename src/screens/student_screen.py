@@ -11,11 +11,16 @@ from src.database.db import create_student
 from PIL import Image
 import numpy as np
 from src.components.dialog_enroll import enroll_dialog
+from src.components.dialog_auto_enroll_subject import auto_enroll_dialog
 from src.components.subject_card import subject_card
 
 def student_dashboard():
     student_data=st.session_state.student_data
     student_id=student_data['student_id']
+
+    pending_join_code = st.session_state.pop('pending_join_code', None)
+    if pending_join_code:
+        auto_enroll_dialog(pending_join_code)
     
     c1,c2=st.columns(2,vertical_alignment='center',gap='xxlarge')
     with c1:
